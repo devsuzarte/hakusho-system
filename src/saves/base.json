@@ -1,0 +1,28 @@
+{
+    "name": "",
+    "technique": "",
+    "leveling": {
+        "rank": "F",
+        "level": 1,
+        "exp": 0
+    },
+    "balance": 500.0,
+    "status": {
+        "vigor": 6,
+        "strength": 6,
+        "presence": 6,
+        "agility": 6,
+        "intelligence": 6
+    },
+    "armor": 6,
+    "health": 36,
+    "energy": 25,
+    "archetypes": [],
+    "weapons": [],
+    "special_weapon": {},
+    "clothes": [],
+    "accessory": {},
+    "consumables": [],
+    "abilities": [],
+    "comment": ""
+}
