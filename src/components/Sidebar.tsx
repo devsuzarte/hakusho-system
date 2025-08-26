@@ -37,7 +37,7 @@ interface SidebarParams {
 function Sidebar({ data, isActive, setIsActive, onOptionClick, onSelectCharacter }: SidebarParams) {
 
   const toggleSidebar = () => setIsActive(prev => !prev)
-
+  console.log(data)
   return (
     <div className="relative flex">
       <aside

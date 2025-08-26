@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+release/*
+dist-electron/*
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +24,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+vite.config.ts.timestamp-1756227057059-efab1b4ab8259.mjs

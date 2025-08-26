@@ -61,7 +61,7 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                         <option value="">Beninho Hunter</option>
                     </select>
                     <div className="flex gap-3">
-                        <button className="bg-bh-blue h-full px-5 rounded-xl cursor-pointer text-white hover:bg-cyan-400 transition-transform duration-200 hover:scale-110">Novo</button>
+                        <button className="bg-bh-blue h-full px-5 rounded-xl cursor-pointer text-white transition-transform duration-200 hover:scale-110">Novo</button>
                         <button className="bg-bh-dark-primary border-bh-red border-2 text-bh-red hover:text-white hover:bg-bh-red  cursor-pointer h-full px-5 rounded-xl transition-transform duration-200 hover:scale-110">Excluir</button>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                     <div className="w-full">
                         {editingField === "name" ? (
                             <input
-                            className="bg-black/20 py-2 px-5 rounded-xl w-full text-4xl font-bold focus:outline-none placeholder:text-white placeholder:opacity-20"
+                            className="w-full text-4xl font-bold focus:outline-none placeholder:text-white placeholder:opacity-20"
                             placeholder={name}
                             autoFocus
                             onChange={(e) => setName(e.target.value)}
@@ -103,7 +103,7 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
 
                         {editingField === "technique" ? (
                             <input
-                            className="bg-black/20 py-1 px-3 rounded-xl placeholder:text-white placeholder:opacity-20 text-xl font-light focus:outline-none"
+                            className="placeholder:text-white placeholder:opacity-20 text-xl font-light focus:outline-none"
                             placeholder={technique}
                             autoFocus
                             onChange={(e) => setTechnique(e.target.value)}
@@ -130,6 +130,19 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                         <div className="mt-3 flex">
                             <input type="number" placeholder="100 ¥" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
                             <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-yellow hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Depositar / Sacar</button>
+                        </div>
+                    </div>
+                    <p className="text-xl font-semibold mt-10">MODIFICADORES</p>
+                    <div className="flex gap-5">
+                        <div className="mt-3 flex">
+                            <input type="number" placeholder="q.v" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
+                            <button className="bg-black/50 px-5 py-2 hover:bg-bh-dark-green hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Aplicar</button>
+                            <p className="rounded-r-lg px-3 py-2 bg-bh-dark-secondary text-white">+30</p>
+                        </div>
+                        <div className="mt-3 flex">
+                            <input type="number" placeholder="q.e.e" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
+                            <button className="bg-black/50 px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Aplicar</button>
+                            <p className="rounded-r-lg px-3 py-2 bg-bh-dark-secondary text-white">+30</p>
                         </div>
                     </div>
                     <p className="text-xl font-semibold mt-10">DADOS</p>
