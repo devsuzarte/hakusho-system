@@ -5,5 +5,5 @@ interface CharacterState {
     activeId: string | null
     addCharacter: (character: Character) => void
     setActive: (id: string) => void
-    
+
 }
