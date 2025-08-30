@@ -134,11 +134,15 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                     </div>
                 </div>
                 <hr className="my-5"/>
+                
                 {
                     isUpdatingCharater ? 
                     <UpdateCharacter setIsConfirmModalActive={setIsConfirmModalActive} setPendingAction={setPendingAction} />
                     :
-                    <NewCharacter />
+                    <>
+                        <p className="text-sm">Campos não preenchidos serão considerados os valores padrões.</p>
+                        <NewCharacter />
+                    </>
                 }
                 
             </div>

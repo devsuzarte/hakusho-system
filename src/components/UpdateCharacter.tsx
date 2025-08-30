@@ -10,7 +10,7 @@ function UpdateCharacter({ setIsConfirmModalActive, setPendingAction }: UpdateCh
     }
     
     return (
-        <div className="mt-5 overflow-y-scroll scrollbar-hide xl:max-h-80">
+        <div className="mt-5 overflow-y-scroll scrollbar-hide max-h-80">
             <p className="text-xl font-semibold">INFORMAÇÕES</p>
             <div className="flex gap-5">
                 <div className="mt-3 flex">

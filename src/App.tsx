@@ -6,7 +6,7 @@ import SystemPage from "./components/System";
 import AbilityPage from "./components/Ability";
 import ShopPage from "./components/Shop";
 import Sidebar from "./components/Sidebar";
-import { Character, type INewCharacter } from "./classes/character";
+import { Character, type INewCharacter } from "./models/character";
 import { Storage } from "./database/storage";
 import MapPage from "./components/Map";
 import CharacterModal from "./components/CharacterModal";

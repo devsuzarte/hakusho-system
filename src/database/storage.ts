@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 import { INDEXED_DB_NAME, INDEXED_STORE_NAME } from "../utils/constraints";
-import type { Character } from "../classes/character";
+import type { Character } from "../models/character";
 
 export class Storage {
     async init() {
