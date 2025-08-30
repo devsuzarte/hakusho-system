@@ -19,8 +19,6 @@ function App() {
   const [isConfirmModalActive, setIsConfirmModalActive] = useState(false)
   const [pendingAction, setPendingAction] = useState<(() => void) | null>(null)
 
-
-
   const executePendingAction = () => {
       if (pendingAction) {
           pendingAction()

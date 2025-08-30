@@ -1,4 +1,5 @@
 export interface ICharacter {
+    id: string
     name: string
     technique: string
     leveling: {
@@ -6,6 +7,7 @@ export interface ICharacter {
         level: number
         exp: number
     }
+    points: number
     balance: number
     status: {
         vigor: number
@@ -26,7 +28,7 @@ export interface ICharacter {
         value: number
         modifier: number
     }
-    achetypes: {
+    archetypes: {
         archetype: string
         health: number
         energy: number
@@ -36,5 +38,5 @@ export interface ICharacter {
     accessory: {}
     consumables: {}[]
     abilities: {}[]
-    comment: ""
+    comment: string
 }
