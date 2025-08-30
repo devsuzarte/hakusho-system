@@ -55,8 +55,8 @@ function App() {
 
   return (  
     <>
-      {character ? <Sidebar data={character.data} isActive={isSidebarActive} setIsActive={setIsSidebarActive} onOptionClick={setActivePage} onSelectCharacter={setIsCharacterModalActive} /> : <></>}
-      <main className="relative bg-bh-dark-primary w-full h-full ">
+      {character ? <Sidebar isActive={isSidebarActive} setIsActive={setIsSidebarActive} onOptionClick={setActivePage} onSelectCharacter={setIsCharacterModalActive} /> : <></>}
+      <main className="relative bg-bh-dark-primary w-full h-full">
         {isSidebarActive && (
           <SideNav onSelect={setActivePage} onSelectCharacter={setIsCharacterModalActive} />
         )}

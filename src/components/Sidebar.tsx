@@ -23,25 +23,23 @@ import CogSvg from "../assets/cog.svg";
 
 import Stat from "./Stat";
 import Equipments from "./Equipments";
-import type { ICharacter } from "../classes/character";
 import SidebarSelector from "./SidebarSelector";
 
 interface SidebarParams {
-  data: ICharacter;
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>
   onOptionClick: (page: string) => void;
   onSelectCharacter: (isOpen: boolean) => void
 }
 
-function Sidebar({ data, isActive, setIsActive, onOptionClick, onSelectCharacter }: SidebarParams) {
+function Sidebar({ isActive, setIsActive, onOptionClick, onSelectCharacter }: SidebarParams) {
 
   const toggleSidebar = () => setIsActive(prev => !prev)
-  console.log(data)
+
   return (
     <div className="relative flex">
       <aside
-        className={`bg-bh-dark-secondary h-full flex flex-col transition-all duration-300 ease-in-out overflow-hidden 
+        className={`bg-bh-dark-secondary h-full flex flex-col transition-all duration-300 ease-in-out overflow-y-scroll scrollbar-hide
           ${isActive ? "w-110 p-6" : "w-20 p-4"}`}
       >
         {!isActive && (
@@ -241,7 +239,7 @@ function Sidebar({ data, isActive, setIsActive, onOptionClick, onSelectCharacter
 
             <textarea
               placeholder="Digite informações adicionais..."
-              className="bg-bh-dark-primary mt-3 h-full p-5 rounded-lg focus:outline-none focus:shadow-none focus:border-none text-sm placeholder:text-white/20"
+              className="bg-bh-dark-primary mt-3 min-h-30 p-5 rounded-lg focus:outline-none focus:shadow-none focus:border-none text-sm placeholder:text-white/20"
             />
           </div>
         )}

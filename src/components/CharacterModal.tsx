@@ -1,6 +1,8 @@
 import { useRef, useState } from "react"
 import CharacterPlaceholder from "../assets/photo-placeholder.png";
 import EditSvg from "../assets/edit.svg";
+import UpdateCharacter from "./UpdateCharacter";
+import NewCharacter from "./NewCharacter";
 
 interface CharacterModalParams {
     isOpen: boolean
@@ -20,32 +22,31 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
 
     const [editingField, setEditingField] = useState<null | "name" | "technique">(null)
 
-    const handleActionWithConfirm = (action: () => void) => {
-        setPendingAction(action)
-        setIsConfirmModalActive(true)
-    }
+    const [isUpdatingCharater, setIsUpdatingCharacter] = useState<boolean>(true)
 
-    // Quando o usuário escolhe uma imagem
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
-            const imageUrl = URL.createObjectURL(file) // cria uma URL temporária
+            const imageUrl = URL.createObjectURL(file) 
             setImage(imageUrl)
         }
     }
 
-    // Dispara o clique no input file
     const handleImageClick = () => {
         fileInputRef.current?.click()
     }
 
+    const saveNewCharacter = () => {
+        
+    }
+    
     return (
         <div
         className="absolute inset-0 flex items-center justify-center bg-black/40"
         onClick={() => onClickBack(false)}
         >
             <div
-                className="bg-bh-dark-primary flex flex-col p-10 rounded-lg shadow-lg w-200"
+                className="bg-bh-dark-primary flex flex-col p-10 rounded-lg shadow-lg"
                 onClick={(e) => e.stopPropagation()} 
             >
                 <p
@@ -54,17 +55,30 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                 >
                 {"<- Voltar"}
                 </p>
-                <div className="flex w-full justify-between h-10">
-                    <select name="" id="" className="bg-bh-dark-secondary px-4 rounded-xl cursor-pointer h-full">
-                        <option value="" disabled>Selecione o seu personagem...</option>
-                        <option value="">Okushibo Kyuta</option>
-                        <option value="">Beninho Hunter</option>
-                    </select>
-                    <div className="flex gap-3">
-                        <button className="bg-bh-blue h-full px-5 rounded-xl cursor-pointer text-white transition-transform duration-200 hover:scale-110">Novo</button>
-                        <button className="bg-bh-dark-primary border-bh-red border-2 text-bh-red hover:text-white hover:bg-bh-red  cursor-pointer h-full px-5 rounded-xl transition-transform duration-200 hover:scale-110">Excluir</button>
+                { isUpdatingCharater ? (
+                    <div className="flex w-full justify-between h-10">
+                        <select name="" id="" className="bg-bh-dark-secondary px-4 rounded-xl cursor-pointer h-full">
+                            <option value="" disabled>Selecione o seu personagem...</option>
+                            <option value="">Okushibo Kyuta</option>
+                            <option value="">Beninho Hunter</option>
+                        </select>
+                        <div className="flex gap-3">
+                            <button className="bg-bh-blue h-full px-5 rounded-xl cursor-pointer text-white transition-transform duration-200 hover:scale-110" onClick={() => setIsUpdatingCharacter(false)}>Novo</button>
+                            <button className="bg-bh-dark-primary border-bh-red border-2 text-bh-red hover:text-white hover:bg-bh-red  cursor-pointer h-full px-5 rounded-xl transition-transform duration-200 hover:scale-110">Excluir</button>
+                        </div>
                     </div>
-                </div>
+                ) :
+                (
+                    <div className="flex w-full justify-end h-10">
+                        <div className="flex gap-3">
+                            <button className="bg-bh-dark-primary border-bh-red border-2 text-bh-red hover:text-white hover:bg-bh-red  cursor-pointer h-full px-5 rounded-xl transition-transform duration-200 hover:scale-110" onClick={() => setIsUpdatingCharacter(true)}>Cancelar</button>
+                            <button className="bg-bh-dark-green h-full px-5 rounded-xl cursor-pointer text-white transition-transform duration-200 hover:scale-110" onClick={() => {
+                                setIsUpdatingCharacter(true)
+                                saveNewCharacter()
+                                }}>Cadastrar</button>
+                        </div>
+                    </div>
+                )}
                 <div className="flex gap-5 mt-10 items-center">
                     <div className="relative group cursor-pointer"  onClick={handleImageClick}>
                         <input
@@ -86,7 +100,7 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                     <div className="w-full">
                         {editingField === "name" ? (
                             <input
-                            className="w-full text-4xl font-bold focus:outline-none placeholder:text-white placeholder:opacity-20"
+                            className="w-full text-4xl font-bold focus:outline-none placeholder:text-white/20"
                             placeholder={name}
                             autoFocus
                             onChange={(e) => setName(e.target.value)}
@@ -120,64 +134,13 @@ function CharacterModal({ isOpen, setPendingAction, setIsConfirmModalActive, onC
                     </div>
                 </div>
                 <hr className="my-5"/>
-                <div className="mt-5">
-                    <p className="text-xl font-semibold">INFORMAÇÕES</p>
-                    <div className="flex gap-5">
-                        <div className="mt-3 flex">
-                            <input type="number" min="0" placeholder="exp" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-purple hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Adicionar</button>
-                        </div>
-                        <div className="mt-3 flex">
-                            <input type="number" placeholder="100 ¥" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-yellow hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Depositar / Sacar</button>
-                        </div>
-                    </div>
-                    <p className="text-xl font-semibold mt-10">MODIFICADORES</p>
-                    <div className="flex gap-5">
-                        <div className="mt-3 flex">
-                            <input type="number" placeholder="q.v" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
-                            <button className="bg-black/50 px-5 py-2 hover:bg-bh-dark-green hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Aplicar</button>
-                            <p className="rounded-r-lg px-3 py-2 bg-bh-dark-secondary text-white">+30</p>
-                        </div>
-                        <div className="mt-3 flex">
-                            <input type="number" placeholder="q.e.e" className="bg-black/20 rounded-l-lg pl-5 py-2 w-20 placeholder:text-white placeholder:opacity-20"/>
-                            <button className="bg-black/50 px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Aplicar</button>
-                            <p className="rounded-r-lg px-3 py-2 bg-bh-dark-secondary text-white">+30</p>
-                        </div>
-                    </div>
-                    <p className="text-xl font-semibold mt-10">DADOS</p>
-                    <div className="flex gap-5 w-full flex-wrap mt-3">
-                        <div className="flex">
-                            <p className="bg-black/20 rounded-l-lg py-2 px-5 text-bh-soft-white">Vigor</p>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Up</button>
-                        </div>
-                        <div className="flex">
-                            <p className="bg-black/20 rounded-l-lg py-2 px-5 text-bh-soft-white">Força</p>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Up</button>
-                        </div>
-                        <div className="flex">
-                            <p className="bg-black/20 rounded-l-lg py-2 px-5 text-bh-soft-white">Presença</p>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Up</button>
-                        </div>
-                        <div className="flex">
-                            <p className="bg-black/20 rounded-l-lg py-2 px-5 text-bh-soft-white">Agilidade</p>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Up</button>
-                        </div>
-                        <div className="flex">
-                            <p className="bg-black/20 rounded-l-lg py-2 px-5 text-bh-soft-white">Inteligência</p>
-                            <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-blue hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Up</button>
-                        </div>
-                    </div>
-                    <p className="text-xl font-semibold mt-10">ARQUÉTIPOS</p>
-                    <div className="flex h-10 mt-3">
-                        <select name="" id="" className="bg-bh-dark-secondary px-4 rounded-l-xl cursor-pointer h-full ">
-                            <option value="" disabled><p className="text-white/20">Selecione um arquétipo...</p></option>
-                            <option value="">Perpetrador</option>
-                            <option value="">Insinuante</option>
-                        </select>
-                        <button className="bg-black/50 rounded-r-lg px-5 py-2 hover:bg-bh-pink hover:text-white cursor-pointer" onClick={() => handleActionWithConfirm(() => {})}>Selecionar</button>
-                    </div>
-                </div>
+                {
+                    isUpdatingCharater ? 
+                    <UpdateCharacter setIsConfirmModalActive={setIsConfirmModalActive} setPendingAction={setPendingAction} />
+                    :
+                    <NewCharacter />
+                }
+                
             </div>
         </div>
     )
